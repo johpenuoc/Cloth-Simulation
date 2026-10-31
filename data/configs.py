@@ -6,3 +6,8 @@ class Configs:
             self.WISZ[1] // 2
         )
         self.RENDER_SCALE = 200
+
+        # physics
+        self.ELAC = .5
+        self.g = 9.81
+        self.MASS = 0.05

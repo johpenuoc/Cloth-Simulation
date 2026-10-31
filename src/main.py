@@ -20,8 +20,8 @@ class Main(Configs):
         self.clock = pygame.time.Clock()
         self.dt = 0
 
-
-        self.cast = Cast(self, Cloth((0, 0, 35), (30, 30, 1), 0).obj)
+        self.obj = Cloth((0, 0, 35), (30, 30, 0), 0).obj
+        self.cast = Cast(self)
 
     def refresh(self):
         self.dis.fill((0, 0, 0))
