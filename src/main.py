@@ -1,0 +1,64 @@
+import pygame
+import sys
+from pygame.locals import *
+
+from pathlib import Path
+parent_dir = str(Path(__file__).resolve().parent.parent)
+if parent_dir not in sys.path:
+    sys.path.append(parent_dir)
+
+from data.configs import Configs
+from gen.objs import Cloth
+from gfx.cast import Cast
+
+class Main(Configs):
+    def __init__(self):
+        super().__init__()
+
+        self.win = pygame.display.set_mode(self.WISZ)
+        self.dis = pygame.Surface(self.DISZ)
+        self.clock = pygame.time.Clock()
+        self.dt = 0
+
+
+        self.cast = Cast(self, Cloth((0, 0, 35), (30, 30, 1), 0).obj)
+
+    def refresh(self):
+        self.dis.fill((0, 0, 0))
+
+    def render(self):
+        self.cast.render()
+
+    def update(self):
+        self.win.blit(
+            pygame.transform.scale(self.dis, self.win.get_size()), (0, 0)
+        )
+
+        pygame.display.update()
+
+    def rollups(self):
+        self.dt = self.clock.tick(60) / 1000
+
+    def events(self):
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+
+        self.cast.vertex_proc()
+
+    def run(self):
+        while 1:
+            self.rollups()
+
+            self.events()
+
+            self.refresh()
+
+            self.render()
+
+            self.update()
+
+if __name__ == '__main__':
+    main = Main()
+    main.run()
