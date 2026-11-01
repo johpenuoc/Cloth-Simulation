@@ -21,6 +21,8 @@ class Cloth:
             x += (width2 / size[0]) * 2
             y = -height2
 
+        rest_dis = (width2 / size[0]) * 2
+
     
 
         points = []
@@ -28,5 +30,5 @@ class Cloth:
             points.append([[*i, i] for i in data])
 
         self.obj = [
-            points, theta, centre
+            points, theta, centre, rest_dis
         ]

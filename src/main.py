@@ -11,6 +11,8 @@ from data.configs import Configs
 from gen.objs import Cloth
 from gfx.cast import Cast
 
+from phsxtot import phsx
+
 class Main(Configs):
     def __init__(self):
         super().__init__()
@@ -20,8 +22,10 @@ class Main(Configs):
         self.clock = pygame.time.Clock()
         self.dt = 0
 
-        self.obj = Cloth((0, 0, 35), (30, 30, 0), 0).obj
+        self.obj = Cloth([0, 0, 35], (30, 30, 0), 0).obj
         self.cast = Cast(self)
+
+        self.phsx = phsx.Physx(self)
 
     def refresh(self):
         self.dis.fill((0, 0, 0))
@@ -44,6 +48,8 @@ class Main(Configs):
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
+
+        self.phsx.simulate()
 
         self.cast.vertex_proc()
 
