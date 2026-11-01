@@ -47,16 +47,16 @@ class Physx:
 
                     diff = sqrt(dx ** 2 + dy ** 2 + dz ** 2)
 
-                    err = (diff - rest_dis) / diff
+                    err = ((diff - rest_dis) / diff)
 
                     is_pinned = 0 if (id2 - 1 - 1) == 0 else 1
-                    self.main.obj[0][id][id2][3][0] -= dx * diff * .5 * dt
-                    self.main.obj[0][id][id2][3][1] -= dy * diff * .5 * dt
-                    self.main.obj[0][id][id2][3][2] -= dz * diff * .5 * dt
+                    self.main.obj[0][id][id2][3][0] -= dx * err * .9 * dt
+                    self.main.obj[0][id][id2][3][1] -= dy * err * .9 * dt
+                    self.main.obj[0][id][id2][3][2] -= dz * err * .9 * dt
 
-                    self.main.obj[0][id][id2 - 1][3][0] += (dx * diff * .5 * dt) * is_pinned
-                    self.main.obj[0][id][id2 - 1][3][1] += (dy * diff * .5 * dt) * is_pinned
-                    self.main.obj[0][id][id2 - 1][3][2] += (dz * diff * .5 * dt) * is_pinned
+                    self.main.obj[0][id][id2 - 1][3][0] += (dx * err * .9 * dt) * is_pinned
+                    self.main.obj[0][id][id2 - 1][3][1] += (dy * err * .9 * dt) * is_pinned
+                    self.main.obj[0][id][id2 - 1][3][2] += (dz * err * .9 * dt) * is_pinned
 
 
         #self.main.obj[0] = points
